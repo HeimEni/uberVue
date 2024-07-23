@@ -64,7 +64,7 @@ export  default {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
             </svg>
-            <h4 class="font-semibold ml-3 text-lg">Clients</h4>
+            <h4 class="font-semibold ml-3 text-lg">Modèles de voitures</h4>
           </div>
           <div v-for="carModel in carModels" :key="carModel.id">
               <span class=" rounded-xl bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full "> <router-link
@@ -72,7 +72,8 @@ export  default {
                   to="/client">
                   {{ carModel.id }}
             </router-link>
-                {{ carModel }}
+                {{ carModel.brand }}
+                {{ carModel.model }}
             </span>
             <br>
           </div>

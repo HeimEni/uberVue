@@ -4,7 +4,8 @@ import { ref} from "vue";
 export default {
   data() {
     return {
-      taxis: ref([])
+      taxis: ref([]),
+      test: ref([])
     }
   },
   async created() {
@@ -20,6 +21,11 @@ export default {
       const response = await fetch('http://127.0.0.1:8000/api/taxis');
       const taxis = await response.json();
       this.taxis =  taxis['hydra:member'];
+
+       const response2 = await fetch("http://127.0.0.1:8000/api/taxis/1");
+       const test = await response2.json();
+       this.test = test['hydra:member'];
+       console.log(test)
     },
 
      updateTaxi: async function(id, taxi) {
@@ -32,7 +38,6 @@ export default {
       });
       return await response.json();
     },
-
 
      deleteTaxi: async function(id) {
       await fetch(`http://127.0.0.1:8000/api/taxis/${id}`, {
@@ -64,15 +69,16 @@ export default {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
             </svg>
-            <h4 class="font-semibold ml-3 text-lg">Clients</h4>
+            <h4 class="font-semibold ml-3 text-lg">Liste des taxis</h4>
           </div>
           <div v-for="taxi in taxis" :key="taxi.id">
-              <span class=" rounded-xl bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full "> <router-link
+              <span class=" rounded-xl bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full ">
+                <router-link
                   class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-3 bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] rounded-full"
                   to="/client">
                   {{ taxi.id }}
             </router-link>
-                {{ taxi }}
+                {{ test }}
             </span>
             <br>
           </div>
