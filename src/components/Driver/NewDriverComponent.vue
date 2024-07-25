@@ -1,46 +1,5 @@
-<script>
-import { ref} from "vue";
+<script setup>
 
-export default {
-  data() {
-    return {
-      taxis: ref([]),
-      test: ref([])
-    }
-  },
-  async created() {
-    await this.getAllTaxis();
-  },
-  methods: {
-     getTaxi: async function(id) {
-      const response = await fetch(`http://127.0.0.1:8080/taxi?id=${id}`);
-      return await response.json();
-    },
-
-     getAllTaxis: async function() {
-      const response = await fetch('http://127.0.0.1:8080/taxi/');
-      this.taxis = await response.json();
-    },
-
-    //  updateTaxi: async function(id, taxi) {
-    //   const response = await fetch(`http://127.0.0.1:8000/api/taxis/${id}`, {
-    //     method: 'PUT',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(taxi),
-    //   });
-    //   return await response.json();
-    // },
-    //
-    //  deleteTaxi: async function(id) {
-    //   await fetch(`http://127.0.0.1:8000/api/taxis/${id}`, {
-    //     method: 'DELETE',
-    //   });
-    // },
-
-  }
-}
 </script>
 
 <template>
@@ -54,16 +13,10 @@ export default {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
             </svg>
-            <h4 class="font-semibold ml-3 text-lg">Liste des taxis</h4>
+            <h4 class="font-semibold ml-3 text-lg">Modèles de voitures</h4>
           </div>
-          <div v-for="taxi in taxis" :key="taxi.id">
+          <div>
               <span class=" rounded-xl bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full ">
-                <router-link
-                  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-3 bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] rounded-full"
-                  to="/taxi/">
-                  {{ taxi.id }}
-            </router-link>
-                  {{ taxi }}
             </span>
             <br>
           </div>
@@ -74,7 +27,7 @@ export default {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
             </svg>
             <span class="flex-grow bg-transparent focus:outline-none font-medium"
-                 ><router-link to="/taxi/new">Add new Taxi</router-link></span>
+            ><router-link to="/carmodel/new">Add new Model</router-link></span>
           </button>
           </span>
         </div>

@@ -12,7 +12,7 @@ export  default {
   },
   methods: {
     createCarModel: async function(carModel) {
-      const response = await fetch('http://127.0.0.1:8000/api/car_models', {
+      const response = await fetch('http://127.0.0.1:8080/carModel/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,32 +23,31 @@ export  default {
     },
 
    getCarModel:  async function(id) {
-      const response = await fetch(`http://127.0.0.1:8000/api/car_models/${id}`);
+      const response = await fetch(`http://127.0.0.1:8080/carModel?id=${id}`);
       return await response.json();
     },
 
      getAllCarModels: async function() {
-      const response = await fetch('http://127.0.0.1:8000/api/car_models');
-      const carModels = await response.json();
-      this.carModels = carModels['hydra:member'];
+      const response = await fetch('http://127.0.0.1:8080/carModel/');
+       this.carModels = await response.json();
     },
 
-    updateCarModel: async function(id, carModel) {
-      const response = await fetch(`http://127.0.0.1:8000/api/car_models/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(carModel),
-      });
-      return await response.json();
-    },
-
-    deleteCarModel: async function(id) {
-      await fetch(`http://127.0.0.1:8000/api/car_models/${id}`, {
-        method: 'DELETE',
-      });
-    },
+    // updateCarModel: async function(id, carModel) {
+    //   const response = await fetch(`http://127.0.0.1:8000/api/car_models/${id}`, {
+    //     method: 'PUT',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(carModel),
+    //   });
+    //   return await response.json();
+    // },
+    //
+    // deleteCarModel: async function(id) {
+    //   await fetch(`http://127.0.0.1:8000/api/car_models/${id}`, {
+    //     method: 'DELETE',
+    //   });
+    // },
   }
 }
 </script>
@@ -72,19 +71,20 @@ export  default {
                   to="/client">
                   {{ carModel.id }}
             </router-link>
-                {{ carModel.brand }}
-                {{ carModel.model }}
+                {{ carModel }}
             </span>
             <br>
           </div>
+          <span class=" rounded-xl bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full ">
           <button class="flex items-center w-full h-8 px-2 mt-2 text-sm font-medium rounded">
             <svg class="w-5 h-5 text-gray-400 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                  viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
             </svg>
-            <input class="flex-grow h-8 ml-4 bg-transparent focus:outline-none font-medium" type="text"
-                   placeholder="add a new task">
+            <span class="flex-grow bg-transparent focus:outline-none font-medium"
+            ><router-link to="/carmodel/new">Add new Model</router-link></span>
           </button>
+          </span>
         </div>
       </div>
     </div>

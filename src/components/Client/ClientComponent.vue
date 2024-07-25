@@ -33,12 +33,11 @@ export default {
 
     getAllClients: async function () {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/clients');
+        const response = await fetch('http://127.0.0.1:8080/client/');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        const clients = await response.json();
-        this.clients = clients['hydra:member'];
+        this.clients = await response.json();
       } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
       }
@@ -77,23 +76,27 @@ export default {
             <h4 class="font-semibold ml-3 text-lg">Clients</h4>
           </div>
           <div v-for="client in clients" :key="client.id">
-              <span class=" rounded-xl bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full "> <router-link
+              <span
+                  class=" rounded-xl bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full "> <router-link
                   class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-3 bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] rounded-full"
                   to="/client">
                   {{ client.id }}
             </router-link>
                 {{ client.phoneNumber }}
+
             </span>
             <br>
           </div>
+          <span class=" rounded-xl bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full ">
           <button class="flex items-center w-full h-8 px-2 mt-2 text-sm font-medium rounded">
             <svg class="w-5 h-5 text-gray-400 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                  viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
             </svg>
-            <input class="flex-grow h-8 ml-4 bg-transparent focus:outline-none font-medium" type="text"
-                   placeholder="add a new task">
+            <span class="flex-grow bg-transparent focus:outline-none font-medium"
+            ><router-link to="/client/new">Add new Client</router-link></span>
           </button>
+          </span>
         </div>
       </div>
     </div>
